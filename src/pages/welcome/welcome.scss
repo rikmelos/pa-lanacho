@@ -1,12 +1,12 @@
 page-welcome {
   .splash-bg {
     position: relative;
-    background: url('../assets/img/splashbg.png') no-repeat transparent;
-    background-size: cover;
-    height: 45%;
+    background: url('../assets/img/edificios-blancos.png') no-repeat transparent;
+    background-size: inherit;
+    height: 55%;
     z-index: 1;
     background-repeat: repeat-x;
-    animation: animatedBackground 40s linear infinite;
+    animation: animatedBackground 5s linear infinite;
   }
 
   @keyframes animatedBackground {
@@ -22,14 +22,15 @@ page-welcome {
   }
   .splash-logo {
     margin: auto;
-    background: url('../assets/img/appicon.png') repeat transparent;
+    background: url('../assets/img/car.png');
     background-size: 100%;
-    width: 128px;
+    width: 200px;
     height: 128px;
+    margin-top: -159px;
   }
   .splash-intro {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 51px;
+    font-family: 'Cabin Sketch';
     max-width: 80%;
     margin: auto;
   }
