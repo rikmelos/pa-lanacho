@@ -6,6 +6,7 @@ import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
+import firebase from 'firebase';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -53,6 +54,15 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.initTranslate();
+    /*
+    firebase.initializeApp({
+      apiKey: "AIzaSyD-0vmMv6aCeChFVt53tOfeHV5Wv4ZqLLQ",
+      authDomain: "pa-lanacho.firebaseapp.com",
+      databaseURL: "https://pa-lanacho.firebaseio.com",
+      projectId: "pa-lanacho",
+      storageBucket: "pa-lanacho.appspot.com",
+      messagingSenderId: "1060635033155"
+    });*/
   }
 
   initTranslate() {

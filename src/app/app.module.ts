@@ -14,6 +14,19 @@ import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
+import { AutenticacionProvider } from '../providers/autenticacion/autenticacion';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import {GeolocationProvider} from "../providers/geolocation/geolocation";
+import {FirebaseProvider} from "../providers/firebase/firebase";
+import {ConfigProvider} from "../providers/config/config";
+
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { HttpModule } from '@angular/http';
+
+
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -42,6 +55,10 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -66,7 +83,11 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AutenticacionProvider,
+    GeolocationProvider,
+    FirebaseProvider,
+    ConfigProvider
   ]
 })
 export class AppModule { }

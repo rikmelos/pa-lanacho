@@ -1,53 +1,68 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
-
-import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoginPage } from "../login/login"
+import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { ConfigProvider } from './../../providers/config/config';
 
 @IonicPage()
 @Component({
   selector: 'page-signup',
-  templateUrl: 'signup.html'
+  templateUrl: 'signup.html',
 })
 export class SignupPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { name: string, email: string, password: string } = {
-    name: 'Test Human',
-    email: 'test@example.com',
-    password: 'test'
-  };
 
-  // Our translated text strings
-  private signupErrorString: string;
+  phone: number;
+  fullname: string;
+  email:string;
+  password: string;
+  password_repeat:string;
 
-  constructor(public navCtrl: NavController,
-    public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
-
-    this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
-      this.signupErrorString = value;
-    })
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public firePro: FirebaseProvider, public configPro: ConfigProvider) {
   }
 
-  doSignup() {
-    // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad SignupPage');
+  }
 
-      this.navCtrl.push(MainPage);
+  login(){
+    this.navCtrl.setRoot(LoginPage);
+  }
 
-      // Unable to sign up
-      let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    });
+  signUp(){
+    if(this.userProfile()){
+      if(this.configPro.validateInputs(this.email, this.password)){
+        this.configPro.presentLoading("Registrando en Pa' la nacho");
+        this.firePro.singUp(this.email, this.password).then(
+          data => {
+            this.firePro.addUser(this.fullname,this.phone, this.email);
+            console.log(data);
+            this.login();
+            this.configPro.dismissLoading();
+          }
+        ).catch( data => {
+          this.configPro.dismissLoading();
+        });
+      }
+    }
+  }
+
+  repeatPassword(): boolean{
+    if(this.password == this.password_repeat) return true;
+    return false;
+  }
+
+  userProfile(): boolean{
+    if(this.repeatPassword()){
+      if(this.fullname != ""){
+        return true;
+      } else {
+        this.configPro.presentToast("Agrega tu nombre");
+        return false;
+      }
+    } else {
+      this.configPro.presentToast("Las contraseñas no coinciden");
+      return false;
+    }
   }
 }
