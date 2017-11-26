@@ -25,7 +25,8 @@ export class RegistrarPage {
               public autenticacionProvider: AutenticacionProvider,
               public alertCtrl: AlertController,
               public configPro: ConfigProvider,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              ) {
   }
 
   ionViewDidLoad() {
@@ -50,15 +51,20 @@ export class RegistrarPage {
 
     toast.present();
   }
-  
 
-  registrarUsuario(formulario: any){
+
+  registrarUsuario(formulario: NgForm){
+
     this.autenticacionProvider.registrarUsuario(
       formulario.value.correo,
       formulario.value.clave)
-      .then(this.resentToast())
+      .then(()=> {
+        this.resentToast();
+      })
+      .then(()=> {
+        this.navCtrl.push('WelcomePage');
+      })
       .then(info => console.log(info))
-      .then(this.navCtrl.push('WelcomePage'))
       .catch(error => {
         let alerta = this.alertCtrl.create({
           title: 'Ocurrió un Error',
