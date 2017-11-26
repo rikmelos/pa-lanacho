@@ -58,7 +58,7 @@ export class EntrarPage {
         this.resentToast();
       })
       .then(()=> {
-        this.navCtrl.push('ContentPage');
+        this.navCtrl.push('MenubasePage');
       })
       .then(info => console.log('Usuario conectado'))
       .catch(error => {
