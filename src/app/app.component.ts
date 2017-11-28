@@ -6,7 +6,7 @@ import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
-import firebase from 'firebase';
+
 
 @Component({
   template: `<ion-menu [content]="content">

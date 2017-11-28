@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ShoppingItem} from "../../models/shopping-item/shopping-item.interface";
+import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
+
 
 /**
  * Generated class for the ConductorPage page.
@@ -18,7 +20,13 @@ export class ConductorPage {
 
   shoppingItem = {} as ShoppingItem;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  shoppingItemRef$: AngularFireList<any>
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              database: AngularFireDatabase) {
+
+
+    this.shoppingItemRef$ = database.list('shopping-list');
   }
 
   ionViewDidLoad() {
@@ -26,8 +34,22 @@ export class ConductorPage {
   }
 
   addShoppingItem(shoppingItem: ShoppingItem){
+
+    console.log(shoppingItem);
+    this.shoppingItemRef$.push({
+      itemName: this.shoppingItem.itemName,
+      itemNumber: Number(this.shoppingItem.itemNumber)
+    });
+
+    this.shoppingItem = {} as ShoppingItem;
+    /*
+    this.shoppingItemRef$.push({
+      itemName: this.shoppingItem.itemName,
+      itemNumber: Number(this.shoppingItem.itemNumber)
+    });
     //console.log('############'+shoppingItem.itemName);
     console.log(shoppingItem);
+    */
   }
 
 }
