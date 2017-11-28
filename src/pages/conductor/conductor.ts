@@ -52,4 +52,9 @@ export class ConductorPage {
     */
   }
 
+  navigateToPasajeroPage() {
+    // Navigate the user to the AddShoppingPage
+    this.navCtrl.push('PasajeroPage');
+  }
+
 }
