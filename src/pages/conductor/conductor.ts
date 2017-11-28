@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {ShoppingItem} from "../../models/shopping-item/shopping-item.interface";
 
 /**
  * Generated class for the ConductorPage page.
@@ -15,11 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ConductorPage {
 
+  shoppingItem = {} as ShoppingItem;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConductorPage');
+  }
+
+  addShoppingItem(shoppingItem: ShoppingItem){
+    //console.log('############'+shoppingItem.itemName);
+    console.log(shoppingItem);
   }
 
 }
