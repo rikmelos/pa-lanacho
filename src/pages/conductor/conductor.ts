@@ -199,9 +199,32 @@ export class ConductorPage {
     console.log(this.todo)
   }
 
+  validacion(){
+    if(this.conductorItem.origen == null && this.conductorItem.destino != null ){
+      this.conductorItem.origen = "Universidad nacional de Colombia";
+    }else if(this.conductorItem.origen != null && this.conductorItem.destino == null){
+      this.conductorItem.destino = "Universidad nacional de Colombia";
+    }
+
+
+  }
+
   navigateToPasajeroPage() {
     // Navigate the user to the AddShoppingPage
-    this.navCtrl.push('PasajeroPage');
+
+
+    this.validacion();
+    if(this.conductorItem.origen  != null && this.conductorItem.destino != null){
+      this.navCtrl.push('RutamapaPage',{
+        origenPassed: this.conductorItem.origen,
+        destinoPassed: this.conductorItem.destino
+      });
+    }else{
+      this.resentToast();
+      this.reload();
+    }
+
+
   }
 
 }
