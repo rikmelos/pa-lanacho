@@ -23,11 +23,23 @@
 
 
 
-  <ion-list>
-    <ion-item *ngFor="let item of items | async">
-      <h2>Item Name: {{item.itemName}}</h2>
-      <h3>Amount: {{item.itemNumber}}</h3>
-    </ion-item>
-  </ion-list>
+<ion-list >
+  <ion-item *ngFor="let item of items | async" >
+    <div style="font-family: 'Cabin Sketch'; font-size: large; width:100% " (click)=navegateInfoPage(item.origen,item.destino,item.nombre,item.fecha,item.hora,item.cupos,item.precio,item.mesajeConductor)>
+    <h2 style="font-family: 'Cabin Sketch'; font-size: large " *ngIf="item.destino =='Universidad nacional de Colombia'">
+      Ruta: {{item.origen}} - Unal
+    </h2>
+    <h2 style="font-family: 'Cabin Sketch'; font-size: large; width:100% " *ngIf="item.origen =='Universidad nacional de Colombia'">
+      Ruta: Unal - {{item.destino}}
+    </h2>
+    <h3 style="font-family: 'Cabin Sketch'; font-size: large;width:100% ">cupos: {{item.cupos}}</h3>
+    </div>
+  </ion-item>
+</ion-list>
 
 </ion-content>
+
+
+
+
+
