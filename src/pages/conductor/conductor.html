@@ -15,13 +15,61 @@
 
 <ion-content padding>
 
+
   <ion-item>
-    <ion-label floating>Item Name</ion-label>
-    <ion-input type="text" [(ngModel)]="shoppingItem.itemName"></ion-input>
+    <ion-label >Ruta</ion-label>
+    <ion-select [(ngModel)]="todo" (ionChange)=ruta() >
+      <ion-option value="nacho">Pa' la nacho</ion-option>
+      <ion-option value="casa">Pa' la casa</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <div *ngIf="title=='nacho'; else otra">
+    <ion-item >
+      <ion-label floating>Lugar Origen</ion-label>
+      <ion-input type="text" [(ngModel)]="shoppingItem.itemName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Lugar de Destino</ion-label>
+      <ion-input class="text-input" disabled="true" value="Universidad Nacional de Colombia"></ion-input>
+    </ion-item>
+
+  </div>
+
+  <ng-template #otra>
+
+    <ion-item>
+    <ion-label floating>Lugar Origen</ion-label>
+    <ion-input class="text-input" disabled="true" value="Universidad Nacional de Colombia"></ion-input>
+    </ion-item>
+
+    <ion-item >
+      <ion-label floating>Lugar de Destino</ion-label>
+      <ion-input type="text" [(ngModel)]="shoppingItem.itemName"></ion-input>
+    </ion-item>
+
+  </ng-template>
+
+
+  <ion-item>
+    <ion-label floating>Precio $</ion-label>
+    <ion-input type="text" [(ngModel)]="coductorItem.precio"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Number</ion-label>
+    <ion-label floating>Fecha</ion-label>
+    <ion-datetime displayFormat="MMM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Hora</ion-label>
+    <ion-datetime displayFormat="H:mm" pickerFormat="H:mm:aa" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Puestos Disponibles</ion-label>
     <ion-input type="number" [(ngModel)]="shoppingItem.itemNumber"></ion-input>
   </ion-item>
 
