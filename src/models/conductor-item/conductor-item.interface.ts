@@ -1,4 +1,5 @@
 export interface ConductorItem{
+  nombre: String;
   origen: String;
   destino: String;
   precio: String;

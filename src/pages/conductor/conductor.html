@@ -15,6 +15,10 @@
 
 <ion-content padding>
 
+  <ion-item >
+    <ion-label floating>Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="conductorItem.nombre"  ></ion-input>
+  </ion-item>
 
   <ion-item>
     <ion-label >Ruta</ion-label>
@@ -28,7 +32,7 @@
   <div *ngIf="title=='nacho'; else otra">
     <ion-item >
       <ion-label floating>Lugar Origen</ion-label>
-      <ion-input type="text" [(ngModel)]="shoppingItem.itemName"></ion-input>
+      <ion-input type="text" [(ngModel)]="conductorItem.origen"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -47,7 +51,7 @@
 
     <ion-item >
       <ion-label floating>Lugar de Destino</ion-label>
-      <ion-input type="text" [(ngModel)]="shoppingItem.itemName"></ion-input>
+      <ion-input type="text" [(ngModel)]="conductorItem.destino"></ion-input>
     </ion-item>
 
   </ng-template>
@@ -55,28 +59,32 @@
 
   <ion-item>
     <ion-label floating>Precio $</ion-label>
-    <ion-input type="text" [(ngModel)]="coductorItem.precio"></ion-input>
+    <ion-input type="text" [(ngModel)]="conductorItem.precio"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Fecha</ion-label>
-    <ion-datetime displayFormat="MMM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    <ion-datetime displayFormat="MMM/DD/YYYY" [(ngModel)]="conductorItem.fecha"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Hora</ion-label>
-    <ion-datetime displayFormat="H:mm" pickerFormat="H:mm:aa" [(ngModel)]="myDate"></ion-datetime>
+    <ion-datetime displayFormat="H:mm" pickerFormat="H:mm:aa" [(ngModel)]="conductorItem.hora"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Puestos Disponibles</ion-label>
-    <ion-input type="number" [(ngModel)]="shoppingItem.itemNumber"></ion-input>
+    <ion-input type="number" [(ngModel)]="conductorItem.cupos"></ion-input>
   </ion-item>
 
-  <button ion-button block (click)=addShoppingItem(shoppingItem)>Add Item</button>
+  <button ion-button block (click)=addConductorItem(conductorItem)>Add Item</button>
 
   <button ion-button block (click)=navigateToPasajeroPage()>Ir a vista Pasajero</button>
 
 
+  <ion-item >
+    <ion-label floating>Mensaje</ion-label>
+  <ion-textarea autoresize="100" [(ngModel)]="conductorItem.mesajeConductor"></ion-textarea>
+  </ion-item>
 
 </ion-content>
